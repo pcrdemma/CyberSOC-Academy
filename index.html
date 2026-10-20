@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberSOC Academy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Barre de navigation -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">◈</span>
+      <span class="brand-name">CyberSOC <b>Academy</b></span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="active" data-view="home">Accueil</a>
+      <a href="#" data-view="scenarios">Scénarios</a>
+      <a href="#" data-view="progress">Progression</a>
+    </nav>
+    <div class="user">
+      <span class="status-dot"></span> Analyste N1
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== VUE ACCUEIL ========== -->
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <p class="eyebrow">SIMULATEUR D'INCIDENTS</p>
+        <h1>Entraînez-vous avant<br />la <span class="glow">vraie alerte</span>.</h1>
+        <p class="hero-sub">
+          Analysez des alertes, examinez les indices, décidez des actions à mener
+          et apprenez de vos choix, dans un environnement 100 % sécuritaire.
+        </p>
+        <div class="hero-actions">
+          <button class="btn primary" data-goto="scenarios">Commencer un scénario</button>
+          <button class="btn ghost" data-goto="progress">Voir ma progression</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="num">2</span><span class="lbl">Scénarios disponibles</span></div>
+        <div class="stat"><span class="num">0</span><span class="lbl">Scénarios terminés</span></div>
+        <div class="stat"><span class="num">--</span><span class="lbl">Score moyen</span></div>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span>01</span><h3>Alerte</h3><p>Une alerte de sécurité apparaît.</p></div>
+        <div class="step"><span>02</span><h3>Indices</h3><p>Consultez logs, IP, courriels.</p></div>
+        <div class="step"><span>03</span><h3>Analyse</h3><p>Normal, suspect ou insuffisant ?</p></div>
+        <div class="step"><span>04</span><h3>Action</h3><p>Choisissez votre réponse.</p></div>
+        <div class="step"><span>05</span><h3>Feedback</h3><p>Comprenez vos décisions.</p></div>
+      </div>
+    </section>
+
+    <!-- ========== VUE SCÉNARIOS ========== -->
+    <section id="view-scenarios" class="view">
+      <h2 class="section-title">Scénarios</h2>
+      <div class="cards">
+
+        <article class="card">
+          <div class="card-head">
+            <span class="tag tag-green">Débutant</span>
+            <span class="tag tag-blue">Hameçonnage</span>
+          </div>
+          <h3>Le courriel de la « Banque »</h3>
+          <p>Un employé signale un courriel inhabituel. Analysez l'expéditeur, le lien et déterminez la portée de l'incident.</p>
+          <div class="card-foot">
+            <span class="meta">⏱ 10 min · 4 indices</span>
+            <button class="btn primary small" data-open="phishing">Lancer</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <span class="tag tag-orange">Intermédiaire</span>
+            <span class="tag tag-blue">Connexion suspecte</span>
+          </div>
+          <h3>Connexion à 3 h du matin</h3>
+          <p>Un compte se connecte depuis une IP inhabituelle. Examinez les logs et décidez comment poursuivre l'analyse.</p>
+          <div class="card-foot">
+            <span class="meta">⏱ 15 min · 5 indices</span>
+            <button class="btn primary small" data-open="login">Lancer</button>
+          </div>
+        </article>
+
+        <article class="card locked">
+          <div class="card-head">
+            <span class="tag tag-red">Avancé</span>
+            <span class="tag tag-blue">Malware</span>
+          </div>
+          <h3>Fichier suspect exécuté</h3>
+          <p>Un poste de travail a exécuté un fichier inconnu. Faut-il l'isoler ? Bientôt disponible.</p>
+          <div class="card-foot">
+            <span class="meta">🔒 À venir</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== VUE SIMULATION ========== -->
+    <section id="view-sim" class="view">
+      <button class="back" data-goto="scenarios">← Retour aux scénarios</button>
+
+      <div class="sim-layout">
+
+        <!-- Colonne gauche : alerte + indices -->
+        <div class="panel">
+          <div class="alert-box">
+            <div class="alert-title">⚠ ALERTE · Sévérité : <b>MOYENNE</b></div>
+            <p id="alert-text">Un employé signale avoir reçu un courriel suspect de « support@banque-securite.co ».</p>
+            <small>Reçue à 09:42 · Source : Signalement utilisateur</small>
+          </div>
+
+          <h3 class="panel-title">Indices disponibles</h3>
+          <div class="evidence">
+            <button class="evidence-item" data-ev="1">📧 En-têtes du courriel</button>
+            <button class="evidence-item" data-ev="2">🔗 Analyse du lien</button>
+            <button class="evidence-item" data-ev="3">👥 Autres destinataires</button>
+            <button class="evidence-item" data-ev="4">🕒 Journal de clics</button>
+          </div>
+
+          <div class="terminal" id="terminal">
+            <div class="term-bar"><i></i><i></i><i></i> <span>inspecteur</span></div>
+            <pre id="term-out">$ Sélectionnez un indice pour l'examiner…</pre>
+          </div>
+        </div>
+
+        <!-- Colonne droite : décision -->
+        <div class="panel">
+          <h3 class="panel-title">1. Votre évaluation</h3>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="eval" /> Activité normale</label>
+            <label class="choice"><input type="radio" name="eval" /> Activité suspecte</label>
+            <label class="choice"><input type="radio" name="eval" /> Informations insuffisantes</label>
+          </div>
+
+          <h3 class="panel-title">2. Niveau de risque</h3>
+          <div class="risk">
+            <button class="risk-btn low">Faible</button>
+            <button class="risk-btn mid">Moyen</button>
+            <button class="risk-btn high">Élevé</button>
+          </div>
+
+          <h3 class="panel-title">3. Actions à entreprendre</h3>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" /> Supprimer le courriel uniquement</label>
+            <label class="choice"><input type="checkbox" /> Vérifier si le lien a été consulté</label>
+            <label class="choice"><input type="checkbox" /> Identifier les autres destinataires</label>
+            <label class="choice"><input type="checkbox" /> Réinitialiser les mots de passe concernés</label>
+            <label class="choice"><input type="checkbox" /> Escalader à l'équipe de sécurité</label>
+          </div>
+
+          <button class="btn primary full" id="submit-btn">Soumettre mon analyse</button>
+        </div>
+      </div>
+
+      <!-- Feedback (maquette) -->
+      <div class="feedback" id="feedback">
+        <h3>Rétroaction</h3>
+        <p>Ici s'affichera l'explication de vos choix, les indices manqués et les conséquences possibles de chaque décision.</p>
+        <div class="score-bar"><div class="score-fill"></div></div>
+        <small>Score fictif : 72 %</small>
+      </div>
+    </section>
+
+    <!-- ========== VUE PROGRESSION ========== -->
+    <section id="view-progress" class="view">
+      <h2 class="section-title">Ma progression</h2>
+      <div class="progress-list">
+        <div class="progress-item">
+          <div><b>Hameçonnage</b><small>Aucune tentative</small></div>
+          <div class="bar"><div style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div><b>Connexion suspecte</b><small>Aucune tentative</small></div>
+          <div class="bar"><div style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div><b>Malware</b><small>Verrouillé</small></div>
+          <div class="bar"><div style="width:0%"></div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    CyberSOC Academy · Projet étudiant · E. Picard, C. Lahaye, E. B. Sidibe, R. Tene Fotsing
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
