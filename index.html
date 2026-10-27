@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CyberSOC Academy</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- Barre de navigation -->
@@ -48,11 +50,26 @@
       </div>
 
       <div class="steps">
-        <div class="step"><span>01</span><h3>Alerte</h3><p>Une alerte de sécurité apparaît.</p></div>
-        <div class="step"><span>02</span><h3>Indices</h3><p>Consultez logs, IP, courriels.</p></div>
-        <div class="step"><span>03</span><h3>Analyse</h3><p>Normal, suspect ou insuffisant ?</p></div>
-        <div class="step"><span>04</span><h3>Action</h3><p>Choisissez votre réponse.</p></div>
-        <div class="step"><span>05</span><h3>Feedback</h3><p>Comprenez vos décisions.</p></div>
+        <div class="step"><span>01</span>
+          <h3>Alerte</h3>
+          <p>Une alerte de sécurité apparaît.</p>
+        </div>
+        <div class="step"><span>02</span>
+          <h3>Indices</h3>
+          <p>Consultez logs, IP, courriels.</p>
+        </div>
+        <div class="step"><span>03</span>
+          <h3>Analyse</h3>
+          <p>Normal, suspect ou insuffisant ?</p>
+        </div>
+        <div class="step"><span>04</span>
+          <h3>Action</h3>
+          <p>Choisissez votre réponse.</p>
+        </div>
+        <div class="step"><span>05</span>
+          <h3>Feedback</h3>
+          <p>Comprenez vos décisions.</p>
+        </div>
       </div>
     </section>
 
@@ -67,7 +84,8 @@
             <span class="tag tag-blue">Hameçonnage</span>
           </div>
           <h3>Le courriel de la « Banque »</h3>
-          <p>Un employé signale un courriel inhabituel. Analysez l'expéditeur, le lien et déterminez la portée de l'incident.</p>
+          <p>Un employé signale un courriel inhabituel. Analysez l'expéditeur, le lien et déterminez la portée de
+            l'incident.</p>
           <div class="card-foot">
             <span class="meta">⏱ 10 min · 4 indices</span>
             <button class="btn primary small" data-open="phishing">Lancer</button>
@@ -80,7 +98,8 @@
             <span class="tag tag-blue">Connexion suspecte</span>
           </div>
           <h3>Connexion à 3 h du matin</h3>
-          <p>Un compte se connecte depuis une IP inhabituelle. Examinez les logs et décidez comment poursuivre l'analyse.</p>
+          <p>Un compte se connecte depuis une IP inhabituelle. Examinez les logs et décidez comment poursuivre
+            l'analyse.</p>
           <div class="card-foot">
             <span class="meta">⏱ 15 min · 5 indices</span>
             <button class="btn primary small" data-open="login">Lancer</button>
@@ -106,23 +125,28 @@
     <section id="view-sim" class="view">
       <button class="back" data-goto="scenarios">← Retour aux scénarios</button>
 
-      <div class="sim-layout">
+      <div class="sim-head">
+        <div>
+          <span class="tag" id="sim-level"></span>
+          <h2 id="sim-title"></h2>
+        </div>
+        <div class="sim-meta" id="sim-meta"></div>
+      </div>
+
+      <div class="context-box" id="sim-context"></div>
+
+      <div class="sim-layout" id="sim-layout">
 
         <!-- Colonne gauche : alerte + indices -->
         <div class="panel">
           <div class="alert-box">
-            <div class="alert-title">⚠ ALERTE · Sévérité : <b>MOYENNE</b></div>
-            <p id="alert-text">Un employé signale avoir reçu un courriel suspect de « support@banque-securite.co ».</p>
-            <small>Reçue à 09:42 · Source : Signalement utilisateur</small>
+            <div class="alert-title" id="alert-title"></div>
+            <p id="alert-text"></p>
+            <small id="alert-meta"></small>
           </div>
 
-          <h3 class="panel-title">Indices disponibles</h3>
-          <div class="evidence">
-            <button class="evidence-item" data-ev="1">📧 En-têtes du courriel</button>
-            <button class="evidence-item" data-ev="2">🔗 Analyse du lien</button>
-            <button class="evidence-item" data-ev="3">👥 Autres destinataires</button>
-            <button class="evidence-item" data-ev="4">🕒 Journal de clics</button>
-          </div>
+          <h3 class="panel-title">Indices disponibles <span class="counter" id="ev-counter"></span></h3>
+          <div class="evidence" id="evidence-list"></div>
 
           <div class="terminal" id="terminal">
             <div class="term-bar"><i></i><i></i><i></i> <span>inspecteur</span></div>
@@ -130,42 +154,28 @@
           </div>
         </div>
 
-        <!-- Colonne droite : décision -->
+        <!-- Colonne droite : décisions -->
         <div class="panel">
           <h3 class="panel-title">1. Votre évaluation</h3>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="eval" /> Activité normale</label>
-            <label class="choice"><input type="radio" name="eval" /> Activité suspecte</label>
-            <label class="choice"><input type="radio" name="eval" /> Informations insuffisantes</label>
-          </div>
+          <div class="choices" id="eval-list"></div>
 
           <h3 class="panel-title">2. Niveau de risque</h3>
-          <div class="risk">
-            <button class="risk-btn low">Faible</button>
-            <button class="risk-btn mid">Moyen</button>
-            <button class="risk-btn high">Élevé</button>
+          <div class="risk" id="risk-list">
+            <button class="risk-btn low" data-risk="low">Faible</button>
+            <button class="risk-btn mid" data-risk="mid">Moyen</button>
+            <button class="risk-btn high" data-risk="high">Élevé</button>
           </div>
 
           <h3 class="panel-title">3. Actions à entreprendre</h3>
-          <div class="choices">
-            <label class="choice"><input type="checkbox" /> Supprimer le courriel uniquement</label>
-            <label class="choice"><input type="checkbox" /> Vérifier si le lien a été consulté</label>
-            <label class="choice"><input type="checkbox" /> Identifier les autres destinataires</label>
-            <label class="choice"><input type="checkbox" /> Réinitialiser les mots de passe concernés</label>
-            <label class="choice"><input type="checkbox" /> Escalader à l'équipe de sécurité</label>
-          </div>
+          <div class="choices" id="action-list"></div>
 
+          <p class="form-error" id="form-error"></p>
           <button class="btn primary full" id="submit-btn">Soumettre mon analyse</button>
         </div>
       </div>
 
-      <!-- Feedback (maquette) -->
-      <div class="feedback" id="feedback">
-        <h3>Rétroaction</h3>
-        <p>Ici s'affichera l'explication de vos choix, les indices manqués et les conséquences possibles de chaque décision.</p>
-        <div class="score-bar"><div class="score-fill"></div></div>
-        <small>Score fictif : 72 %</small>
-      </div>
+      <!-- Rétroaction -->
+      <div class="feedback" id="feedback"></div>
     </section>
 
     <!-- ========== VUE PROGRESSION ========== -->
@@ -174,15 +184,21 @@
       <div class="progress-list">
         <div class="progress-item">
           <div><b>Hameçonnage</b><small>Aucune tentative</small></div>
-          <div class="bar"><div style="width:0%"></div></div>
+          <div class="bar">
+            <div style="width:0%"></div>
+          </div>
         </div>
         <div class="progress-item">
           <div><b>Connexion suspecte</b><small>Aucune tentative</small></div>
-          <div class="bar"><div style="width:0%"></div></div>
+          <div class="bar">
+            <div style="width:0%"></div>
+          </div>
         </div>
         <div class="progress-item">
           <div><b>Malware</b><small>Verrouillé</small></div>
-          <div class="bar"><div style="width:0%"></div></div>
+          <div class="bar">
+            <div style="width:0%"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -195,4 +211,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
